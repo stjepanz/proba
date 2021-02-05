@@ -51,8 +51,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PUT, "/customer/**").hasAnyAuthority("MANAGER", "ADMIN")
                 .antMatchers(HttpMethod.GET, "/customer/**").hasAnyAuthority("EMPLOYEE", "MANAGER", "ADMIN")
                 .antMatchers(HttpMethod.GET, "/customer").hasAnyAuthority("EMPLOYEE", "MANAGER", "ADMIN")
-                .antMatchers("/swagger-ui-customer.html").hasAnyAuthority("MANAGER", "ADMIN")
-                .antMatchers("/api-docs").hasAnyAuthority("MANAGER", "ADMIN")
                 .and()
                 .httpBasic()
                 .and()
