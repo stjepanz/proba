@@ -1,9 +1,9 @@
 package com.customerrest.app.service;
 
-import com.customerrest.app.entity.Customer;
 import com.customerrest.app.entity.Users;
 import com.customerrest.app.repository.AdminRepository;
-import com.customerrest.app.repository.CustomerRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class AdminService {
 
-
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     AdminRepository repository;
@@ -24,6 +24,7 @@ public class AdminService {
             return userList;
         }
         catch (Exception e){
+            logger.debug("Baza je prazna");
             return null;
         }
     }
@@ -34,6 +35,7 @@ public class AdminService {
             return user.get();
         }
         catch (Exception e){
+            logger.debug("Usera koji ima id: " + id +" ne postoji");
             return null;
         }
     }
@@ -61,7 +63,9 @@ public class AdminService {
             Optional<Users> user = repository.findById(id);
             repository.deleteById(id);
         }
-        catch (Exception e){}
+        catch (Exception e){
+            logger.debug("User koji ima id: " + id +" ne postoji");
+        }
     }
 }
 
